@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anka TMS — Technology that serves people</title>
+    <meta name="description" content="Anka TMS builds digital products grounded in human values — where innovation meets integrity and technology serves the people who use it.">
+    <meta property="og:title" content="Anka TMS — Technology that serves people">
+    <meta property="og:description" content="Digital products grounded in human values. Innovation meets integrity.">
+    <meta property="og:image" content="https://ankatms.com/assets/images/sparkle-icon.jpeg">
+    <meta property="og:url" content="https://ankatms.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/shared.css">
+    <style>
+        body {
+            background: #09111D;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ---- Dark nav override ---- */
+        nav {
+            background: rgba(9, 17, 29, 0.8);
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .logo-anka {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-tms {
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-links a { color: rgba(255, 255, 255, 0.45); }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a::after { background: linear-gradient(90deg, var(--sparkle-gold), var(--sparkle-teal)); }
+
+        .nav-links .nav-cta {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .nav-links .nav-cta:hover {
+            background: rgba(255, 255, 255, 0.14);
+            box-shadow: none;
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            position: relative;
+            padding: 200px 24px 160px;
+            text-align: center;
+            background: #09111D;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.06) 0%, rgba(43, 191, 164, 0.04) 30%, transparent 60%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .hero-studio {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: rgba(255, 255, 255, 0.4);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Divider line */
+        .divider {
+            width: 48px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            margin: 0 auto;
+        }
+
+        /* ---- Product ---- */
+        .product {
+            padding: 120px 24px;
+            background: #09111D;
+        }
+
+        .product-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 64px;
+        }
+
+        .product-text {
+            flex: 1;
+        }
+
+        .product-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--sparkle-gold);
+            margin-bottom: 16px;
+        }
+
+        .product-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .product-text p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.65;
+            margin-bottom: 28px;
+            max-width: 420px;
+        }
+
+        .product-meta {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 28px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-light {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: var(--font);
+            border-radius: 980px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: #fff;
+            color: #09111D;
+        }
+
+        .btn-light:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-dark-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: var(--font);
+            border-radius: 980px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-dark-outline:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        .product-phone {
+            flex-shrink: 0;
+            width: 260px;
+        }
+
+        .product-phone .phone-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 393 / 852;
+            border-radius: clamp(32px, 15%, 44px);
+            overflow: hidden;
+            background: #000;
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(245, 166, 35, 0.04);
+        }
+
+        .product-phone .phone-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        /* ---- Values ---- */
+        .values {
+            padding: 120px 24px;
+            background: #0C1520;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .values-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .values-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: #ffffff;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            max-width: 960px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .value-item {
+            padding: 36px 28px;
+            background: #0C1520;
+        }
+
+        .value-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .value-item p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.35);
+            line-height: 1.55;
+        }
+
+        .value-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+        }
+
+        /* ---- Footer ---- */
+        footer {
+            background: #09111D !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-copy { color: rgba(255, 255, 255, 0.2); }
+        .footer-links a { color: rgba(255, 255, 255, 0.3); }
+        .footer-links a:hover { color: rgba(255, 255, 255, 0.6); }
+
+        /* ---- Mobile ---- */
+        @media (max-width: 768px) {
+            .hero { padding: 160px 20px 120px; }
+
+            .product-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 48px;
+            }
+
+            .product-text p { margin-left: auto; margin-right: auto; }
+            .product-actions { justify-content: center; }
+            .product-phone { width: 220px; }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-phone { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo"><span class="logo-anka">Anka</span><span class="logo-tms">TMS</span></a>
+            <ul class="nav-links">
+                <li><a href="#product">Product</a></li>
+                <li><a href="#values">About</a></li>
+                <li><a href="mailto:support@ankatms.com">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <p class="hero-studio">THE MAKERS STUDIO</p>
+            <h1>Technology that<br>serves people.</h1>
+            <p>We design and build digital products where privacy is the default, every feature earns its place, and the people who use them always come first.</p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Product -->
+    <section class="product" id="product">
+        <div class="product-inner">
+            <div class="product-text fade-in">
+                <p class="product-label">Our Product</p>
+                <h2>Sparkle</h2>
+                <p>A motivation system that helps kids build real habits &mdash; reading, studying, learning new things. They start for the stars. They stay because it becomes who they are. Built to relieve parents and help kids reach their potential.</p>
+                <p class="product-meta">by Anka &middot; iOS &middot; iPhone &amp; iPad &middot; Beta</p>
+                <div class="product-actions">
+                    <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn-light">Join Beta</a>
+                    <a href="/sparkle" class="btn-dark-outline">Learn more</a>
+                </div>
+            </div>
+            <div class="product-phone fade-in fade-in-delay-2">
+                <div class="phone-frame">
+                    <img src="/assets/images/sparkle/screen-home.jpg" alt="Sparkle app home screen" width="603" height="1311" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values" id="values">
+        <div class="values-header fade-in">
+            <p class="section-label" style="color: rgba(255,255,255,0.25); text-align: center;">What we believe</p>
+            <h2>The principles behind every product</h2>
+        </div>
+        <div class="values-grid fade-in">
+            <div class="value-item">
+                <div class="value-dot" style="background: var(--sparkle-gold);"></div>
+                <h3>People First</h3>
+                <p>Technology adapts to people, not the other way around. We build for real lives, not engagement metrics.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-dot" style="background: var(--sparkle-teal);"></div>
+                <h3>Fresh Perspective</h3>
+                <p>We question defaults. If something can be simpler, more private, or more respectful &mdash; it should be.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-dot" style="background: var(--sparkle-star-yellow);"></div>
+                <h3>Thoughtful Craft</h3>
+                <p>Innovation is not adding more. It's making complexity disappear without losing depth.</p>
+            </div>
+            <div class="value-item">
+                <div class="value-dot" style="background: var(--sparkle-purple);"></div>
+                <h3>Integrity by Design</h3>
+                <p>No tracking, no dark patterns, no data harvesting. Privacy is a foundation, not a feature.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">&copy; 2026 Anka TMS</p>
+            <ul class="footer-links">
+                <li><a href="/sparkle">Sparkle</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="/terms">Terms</a></li>
+                <li><a href="mailto:support@ankatms.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

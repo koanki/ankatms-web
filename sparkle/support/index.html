@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support — Sparkle</title>
+    <meta name="description" content="Get help with Sparkle. FAQ, troubleshooting, and contact information.">
+    <meta property="og:title" content="Support — Sparkle">
+    <meta property="og:description" content="Find answers to common questions or reach out to us directly.">
+    <meta property="og:url" content="https://ankatms.com/sparkle/support">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/shared.css">
+    <style>
+        body { background: #09111D; color: rgba(255,255,255,0.8); }
+
+        /* Dark nav */
+        nav { background: rgba(9,17,29,0.8); border-bottom-color: rgba(255,255,255,0.06); }
+        .logo { display: flex; align-items: baseline; gap: 5px; }
+        .logo .logo-word { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+        .logo .logo-tms { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+        .breadcrumb { color: rgba(255,255,255,0.3) !important; }
+        .breadcrumb span { color: rgba(255,255,255,0.15) !important; }
+        .breadcrumb a { color: rgba(255,255,255,0.4) !important; }
+        .breadcrumb a:hover { color: rgba(255,255,255,0.7) !important; }
+
+        /* Page content */
+        .page-content { max-width: 720px; margin: 0 auto; padding: 116px 24px 100px; }
+        .page-header { margin-bottom: 48px; }
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; letter-spacing: -0.03em;
+            color: #fff; margin-bottom: 8px;
+        }
+        .page-header p { font-size: 1.05rem; color: rgba(255,255,255,0.4); }
+
+        /* Contact box */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(224,64,251,0.06));
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 48px;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+        }
+        .contact-box-text h3 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
+        .contact-box-text p { font-size: 0.88rem; color: rgba(255,255,255,0.4); }
+        .btn-contact {
+            padding: 12px 24px; font-size: 0.9rem; background: #fff; color: #09111D;
+            border-radius: 980px; font-weight: 600; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;
+        }
+        .btn-contact:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255,255,255,0.1); }
+
+        /* FAQ */
+        .faq-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 24px;
+        }
+        .faq-item {
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s;
+        }
+        .faq-item:hover { border-color: rgba(0,212,255,0.2); }
+        .faq-question {
+            width: 100%; background: none; border: none; padding: 20px 24px;
+            font-family: var(--font); font-size: 0.95rem; font-weight: 600;
+            color: rgba(255,255,255,0.8); text-align: left; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;
+        }
+        .faq-question:hover { background: rgba(255,255,255,0.03); }
+        .faq-question .chevron { transition: transform 0.3s ease; flex-shrink: 0; margin-left: 16px; color: rgba(255,255,255,0.3); }
+        .faq-item.open .faq-question .chevron { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 300px; }
+        .faq-answer-inner { padding: 0 24px 20px; font-size: 0.92rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+        .faq-answer-inner a { color: var(--sparkle-cyan); text-decoration: none; }
+        .faq-answer-inner a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer { background: #09111D !important; border-top: 1px solid rgba(255,255,255,0.04); }
+        .footer-copy { color: rgba(255,255,255,0.2) !important; }
+        .footer-links a { color: rgba(255,255,255,0.3) !important; }
+        .footer-links a:hover { color: rgba(255,255,255,0.6) !important; }
+
+        @media (max-width: 600px) {
+            .contact-box { flex-direction: column; text-align: center; }
+            .page-content { padding: 100px 20px 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo"><span class="logo-word">Anka</span> <span class="logo-tms">TMS</span></a>
+            <span class="breadcrumb"><span>/</span><a href="/sparkle">Sparkle</a><span>/</span>Support</span>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="page-header">
+            <h1>Sparkle Support</h1>
+            <p>Find answers to common questions or reach out to us directly.</p>
+        </div>
+
+        <div class="contact-box">
+            <div class="contact-box-text">
+                <h3>Need help?</h3>
+                <p>We typically respond within 24 hours.</p>
+            </div>
+            <a href="mailto:support@ankatms.com" class="btn-contact">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email Support
+            </a>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I get started?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Download Sparkle from the App Store. The app will guide you through a short onboarding where you add your first child and create tasks. No account or sign-up required.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do tasks and stars work?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Parents create tasks and assign a star value. When a child completes a task, a parent approves it, and the stars are added to the child's balance. Stars can then be spent on rewards you define.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What are instant vs. timed tasks?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Instant tasks are completed with a single tap (e.g., "Make your bed"). Timed tasks include a built-in Pomodoro timer for focus sessions (e.g., "Read a book for 25 minutes").</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do rewards work?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Parents create rewards with a star cost (e.g., "Pizza Night" for 20 stars). Kids request rewards when they have enough stars, and parents approve the request. You can also create shared family rewards that kids contribute to together.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is my data safe?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes. All data stays on your device by default. If you enable iCloud sync, data is stored in your private iCloud account and is not accessible to us. We use no analytics or tracking. See our <a href="/sparkle/privacy">privacy policy</a> for details.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Does Sparkle work on multiple devices?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes. With iCloud sync enabled, Sparkle syncs across all devices signed in with the same Apple ID. Changes sync automatically when a connection is available, and the app works fully offline.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is the parent PIN?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">The parent PIN protects access to the parent dashboard where you manage tasks, rewards, and approvals. This prevents children from modifying settings or approving their own tasks.</div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I report a bug?
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Email us at <a href="mailto:support@ankatms.com">support@ankatms.com</a> with a description of the issue, what you expected to happen, and any steps to reproduce it. Include your iOS version and device model if possible.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">&copy; 2026 Anka TMS</p>
+            <ul class="footer-links">
+                <li><a href="/sparkle">Sparkle</a></li>
+                <li><a href="/sparkle/privacy">Privacy</a></li>
+                <li><a href="mailto:support@ankatms.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+
+</body>
+</html>

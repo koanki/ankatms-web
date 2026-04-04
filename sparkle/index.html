@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkle — Family Task & Reward App for iOS</title>
+    <meta name="description" content="Sparkle: A motivation system that helps kids build real habits — reading, studying, growing. Stars and rewards turn effort into lasting routines. No accounts, no tracking.">
+    <meta property="og:title" content="Sparkle — Stars, Badges & Rewards for Kids">
+    <meta property="og:description" content="A motivation system that turns effort into habit. Kids earn stars, build streaks, and grow into their potential. No accounts, no tracking.">
+    <meta property="og:image" content="https://ankatms.com/assets/images/sparkle-icon.jpeg">
+    <meta property="og:url" content="https://ankatms.com/sparkle">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/shared.css">
+    <style>
+        body { background: #09111D; color: rgba(255,255,255,0.8); }
+
+        /* ---- Dark nav ---- */
+        nav { background: rgba(9,17,29,0.8); border-bottom-color: rgba(255,255,255,0.06); }
+        .logo { display: flex; align-items: baseline; gap: 5px; }
+        .logo-word {
+            font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+            color: #fff; letter-spacing: -0.02em;
+            -webkit-text-fill-color: unset;
+        }
+        .logo-tms { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+        .nav-links a { color: rgba(255,255,255,0.45); }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a::after { background: linear-gradient(90deg, var(--sparkle-cyan), var(--sparkle-magenta)); }
+        .nav-links .nav-cta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: #fff; }
+        .nav-links .nav-cta:hover { background: rgba(255,255,255,0.14); box-shadow: none; }
+
+        /* ---- Hero ---- */
+        .hero {
+            position: relative; padding: 160px 24px 0; text-align: center;
+            background: #09111D; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, rgba(224,64,251,0.06) 40%, transparent 70%);
+            border-radius: 50%; animation: pulse 6s ease-in-out infinite;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -10%; right: -5%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(224,64,251,0.1) 0%, transparent 60%);
+            border-radius: 50%; animation: pulse 8s ease-in-out infinite reverse;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+        .hero-icon {
+            width: 120px; height: 120px; border-radius: 28px; margin: 0 auto 32px; overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,212,255,0.2), 0 0 80px rgba(224,64,251,0.1);
+        }
+        .hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .hero h1 {
+            font-family: var(--font-display); font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+            font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; color: #fff; margin-bottom: 16px;
+        }
+        .hero .tagline { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: rgba(255,255,255,0.45); max-width: 520px; margin: 0 auto 12px; line-height: 1.5; }
+        .hero .attribution { font-size: 0.82rem; color: rgba(255,255,255,0.25); margin-bottom: 32px; }
+        .hero .attribution a { color: rgba(255,255,255,0.35); text-decoration: none; }
+        .hero .attribution a:hover { color: rgba(255,255,255,0.6); }
+        .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-hero { background: #fff; color: #09111D; box-shadow: 0 4px 24px rgba(255,255,255,0.1); }
+        .btn-hero:hover { transform: scale(1.04) translateY(-1px); box-shadow: 0 8px 32px rgba(255,255,255,0.15); }
+        .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.1); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+
+        /* Hero phone */
+        .hero-phone { position: relative; z-index: 3; margin-top: 48px; }
+        .phone-mockup { position: relative; width: 280px; margin: 0 auto; animation: float-slow 5s ease-in-out infinite; }
+        .phone-frame {
+            position: relative; width: 100%; aspect-ratio: 393 / 852;
+            border-radius: clamp(32px, 15%, 44px); overflow: hidden; background: #000;
+            border: 3px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 60px rgba(0,212,255,0.06), 0 0 60px rgba(224,64,251,0.04);
+        }
+        .phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+        .hero-dots span { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); pointer-events: none; }
+
+        /* ---- Intro ---- */
+        .intro { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
+        .intro-inner { border-left: 3px solid transparent; border-image: linear-gradient(180deg, var(--sparkle-cyan), var(--sparkle-magenta)) 1; padding-left: 32px; }
+        .intro h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 20px; color: #fff; }
+        .intro p { font-size: 1.05rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 560px; }
+
+        /* ---- Features ---- */
+        .features { background: #09111D; padding-top: 80px; padding-bottom: 40px; }
+        .features-header { text-align: center; margin-bottom: 24px; }
+        .features-header h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: #fff; }
+
+        .feature-block { display: flex; align-items: center; gap: 64px; padding: 64px 0; }
+        .feature-block:nth-child(even) { flex-direction: row-reverse; }
+        .feature-block-text { flex: 1; max-width: 440px; }
+        .feature-block-text h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; color: #fff; }
+        .feature-block-text p { font-size: 1.05rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+        .feature-block-phone { flex-shrink: 0; width: 280px; position: relative; }
+        .feature-block-phone .phone-frame {
+            border-color: rgba(255,255,255,0.08);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 40px rgba(0,212,255,0.04);
+        }
+
+        .float-star { position: absolute; border-radius: 50%; opacity: 0.5; pointer-events: none; animation: float 3s ease-in-out infinite; }
+        .float-star-cyan { background: var(--sparkle-cyan); box-shadow: 0 0 12px var(--sparkle-cyan); }
+        .float-star-magenta { background: var(--sparkle-magenta); box-shadow: 0 0 12px var(--sparkle-magenta); }
+        .float-star-gold { background: var(--sparkle-star-yellow); box-shadow: 0 0 10px var(--sparkle-star-yellow); }
+        .float-star-slow { animation: float-slow 5s ease-in-out infinite; }
+
+        /* ---- How it Works ---- */
+        .how-it-works { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
+        .how-it-works h2 { text-align: center; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 56px; color: #fff; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 800px; margin: 0 auto; }
+        .step { text-align: center; }
+        .step-number { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--sparkle-cyan), var(--sparkle-magenta)); color: #fff; font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+        .step p { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+        /* ---- Highlights ---- */
+        .highlights { background: #09111D; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); }
+        .highlights::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, rgba(224,64,251,0.04) 30%, transparent 60%); border-radius: 50%; }
+        .highlights-content { position: relative; z-index: 2; }
+        .highlights .section-label { color: var(--sparkle-cyan); }
+        .highlights h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 48px; color: #fff; }
+        .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 800px; margin: 0 auto; }
+        .highlight-item h3 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .highlight-item p { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+        /* ---- FAQ ---- */
+        .faq { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
+        .faq-header { text-align: center; margin-bottom: 48px; }
+        .faq-header h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: #fff; }
+        .faq-list { max-width: 680px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-size: 1.05rem; font-weight: 600; color: rgba(255,255,255,0.8); font-family: var(--font); padding: 20px 0; }
+        .faq-question:hover { color: var(--sparkle-cyan); }
+        .faq-chevron { flex-shrink: 0; width: 20px; height: 20px; transition: transform 0.25s ease; color: rgba(255,255,255,0.3); }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+        .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease, opacity 0.3s ease; opacity: 0; }
+        .faq-item.open .faq-answer { grid-template-rows: 1fr; opacity: 1; }
+        .faq-answer-inner { overflow: hidden; }
+        .faq-answer-inner p { padding: 0 0 20px; font-size: 0.95rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+
+        /* ---- CTA ---- */
+        .cta { background: #09111D; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+        .cta h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; color: #fff; }
+        .cta p { font-size: 1.05rem; color: rgba(255,255,255,0.4); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .cta-rating { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; }
+        .cta-rating .rating-number { font-size: 1.15rem; font-weight: 700; color: #fff; }
+        .cta-rating .rating-stars { display: flex; gap: 2px; }
+        .cta-rating .rating-label { font-size: 0.85rem; color: rgba(255,255,255,0.35); }
+
+        /* ---- Mobile ---- */
+        @media (max-width: 768px) {
+            .hero { padding: 140px 20px 0; }
+            .hero-icon { width: 96px; height: 96px; border-radius: 22px; }
+            .phone-mockup { width: 240px; }
+
+            .feature-block,
+            .feature-block:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+                padding: 48px 0;
+            }
+
+            .feature-block-text { max-width: 100%; }
+            .feature-block-phone { width: 240px; }
+            .float-star { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .phone-mockup { width: 220px; }
+            .feature-block-phone { width: 220px; }
+            .hero-dots { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo"><span class="logo-word">Anka</span> <span class="logo-tms">TMS</span></a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="/sparkle/privacy">Privacy</a></li>
+                <li><a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="nav-cta">Join Beta</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <!-- Scattered dots -->
+        <div class="hero-dots" aria-hidden="true">
+            <span style="top:10%;left:7%;width:3px;height:3px;"></span>
+            <span style="top:22%;left:16%;width:2px;height:2px;"></span>
+            <span style="top:38%;left:4%;width:4px;height:4px;"></span>
+            <span style="top:58%;left:12%;width:2px;height:2px;"></span>
+            <span style="top:74%;left:9%;width:3px;height:3px;"></span>
+            <span style="top:15%;right:10%;width:2px;height:2px;"></span>
+            <span style="top:32%;right:5%;width:3px;height:3px;"></span>
+            <span style="top:48%;right:16%;width:2px;height:2px;"></span>
+            <span style="top:65%;right:7%;width:4px;height:4px;"></span>
+            <span style="top:80%;right:13%;width:2px;height:2px;"></span>
+            <span style="top:8%;left:42%;width:2px;height:2px;"></span>
+            <span style="top:85%;left:58%;width:3px;height:3px;"></span>
+        </div>
+
+        <div class="hero-content fade-in">
+            <div class="hero-icon">
+                <img src="/assets/images/sparkle-icon.jpeg" alt="Sparkle app icon" width="120" height="120">
+            </div>
+            <h1>Every kid deserves to shine</h1>
+            <p class="tagline">A motivation system that helps kids build real habits &mdash; reading, learning, growing &mdash; one star at a time.</p>
+            <p class="attribution"><a href="/">by Anka</a> &middot; a TMS studio &middot; iOS</p>
+            <div class="hero-actions">
+                <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn btn-hero">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Request TestFlight Beta
+                </a>
+                <a href="#features" class="btn btn-ghost">Learn more</a>
+            </div>
+        </div>
+
+        <!-- Hero phone mockup -->
+        <div class="hero-phone fade-in fade-in-delay-2">
+            <div class="phone-mockup">
+                <div class="phone-frame">
+                    <img src="/assets/images/sparkle/screen-home.jpg" alt="Sparkle home screen showing family profiles and weekly stats" width="603" height="1311">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro">
+        <div class="container">
+            <div class="fade-in intro-inner">
+                <p class="section-label" style="color: var(--sparkle-cyan);">What is Sparkle?</p>
+                <h2>Stars today. Habits tomorrow.</h2>
+                <p>Parents set meaningful tasks &mdash; reading, studying, learning something new. Kids earn stars, build streaks, and unlock achievements. At first they do it for the rewards. Over time, it becomes habit. The star system fades into the background, and what's left is a child who reads on their own, studies without being asked, and grows into their potential. No accounts, no subscriptions, just your family and your device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container-lg">
+            <div class="features-header fade-in">
+                <p class="section-label" style="color: var(--sparkle-magenta);">Features</p>
+                <h2>Everything your family needs</h2>
+            </div>
+
+            <!-- Feature 1: Tasks -->
+            <div class="feature-block fade-in">
+                <div class="feature-block-text">
+                    <h3>Complete tasks, earn stars</h3>
+                    <p>Reading, homework, practice sessions, learning new skills &mdash; parents define the tasks that matter. Kids tap to start, earn stars on completion, and build momentum. A built-in Pomodoro timer helps with focused work. Harder tasks earn more stars &mdash; because effort deserves recognition.</p>
+                </div>
+                <div class="feature-block-phone">
+                    <div class="phone-mockup" style="animation: none;">
+                        <div class="phone-frame">
+                            <img src="/assets/images/sparkle/screen-tasks.jpg" alt="Kid's task list with star rewards" width="603" height="1311" loading="lazy">
+                        </div>
+                    </div>
+                    <span class="float-star float-star-cyan" style="top: -8px; right: -12px; width: 10px; height: 10px;"></span>
+                    <span class="float-star float-star-magenta float-star-slow" style="bottom: 20%; left: -16px; width: 8px; height: 8px;"></span>
+                </div>
+            </div>
+
+            <!-- Feature 2: Rewards (reversed) -->
+            <div class="feature-block fade-in">
+                <div class="feature-block-text">
+                    <h3>Spend stars on real rewards</h3>
+                    <p>Parents define rewards with star prices &mdash; from extra screen time to a family pizza night. Kids save up and redeem when they're ready. Shared rewards let siblings pool their stars and work together toward a common goal.</p>
+                </div>
+                <div class="feature-block-phone">
+                    <div class="phone-mockup" style="animation: none;">
+                        <div class="phone-frame">
+                            <img src="/assets/images/sparkle/screen-rewards.jpg" alt="Rewards list with star prices" width="603" height="1311" loading="lazy">
+                        </div>
+                    </div>
+                    <span class="float-star float-star-cyan" style="top: 15%; right: -14px; width: 12px; height: 12px; animation-delay: 0.5s;"></span>
+                </div>
+            </div>
+
+            <!-- Feature 3: Achievements -->
+            <div class="feature-block fade-in">
+                <div class="feature-block-text">
+                    <h3>Unlock achievements &amp; level up</h3>
+                    <p>Six levels from Beginner to Diamond. 26 badges to unlock &mdash; from "First Step" to "Cosmic Champion". Daily streaks, weekly goals, and personal bests keep kids motivated long after the novelty wears off.</p>
+                </div>
+                <div class="feature-block-phone">
+                    <div class="phone-mockup" style="animation: none;">
+                        <div class="phone-frame">
+                            <img src="/assets/images/sparkle/screen-badges.jpg" alt="Achievement badges and trophies" width="603" height="1311" loading="lazy">
+                        </div>
+                    </div>
+                    <span class="float-star float-star-magenta float-star-slow" style="top: -10px; left: -10px; width: 10px; height: 10px;"></span>
+                    <span class="float-star float-star-cyan" style="bottom: 30%; right: -16px; width: 8px; height: 8px; animation-delay: 1s;"></span>
+                </div>
+            </div>
+
+            <!-- Feature 4: Customize (reversed) -->
+            <div class="feature-block fade-in">
+                <div class="feature-block-text">
+                    <h3>Make it truly theirs</h3>
+                    <p>Kids unlock and equip animated avatar frames, gradient titles, and vivid backgrounds as they level up. Rare cosmetics glow and shimmer &mdash; the ultimate bragging rights between siblings.</p>
+                </div>
+                <div class="feature-block-phone">
+                    <div class="phone-mockup" style="animation: none;">
+                        <div class="phone-frame">
+                            <img src="/assets/images/sparkle/screen-customize.jpg" alt="Avatar and background customization" width="603" height="1311" loading="lazy">
+                        </div>
+                    </div>
+                    <span class="float-star float-star-cyan" style="top: 10%; left: -12px; width: 10px; height: 10px; animation-delay: 0.3s;"></span>
+                </div>
+            </div>
+
+            <!-- Feature 5: Parent Control -->
+            <div class="feature-block fade-in">
+                <div class="feature-block-text">
+                    <h3>You're always in control</h3>
+                    <p>Approve tasks, manage rewards, view weekly stats and activity history, and adjust stars &mdash; all behind a PIN-protected parent area. Full control, zero hassle.</p>
+                </div>
+                <div class="feature-block-phone">
+                    <div class="phone-mockup" style="animation: none;">
+                        <div class="phone-frame">
+                            <img src="/assets/images/sparkle/screen-control.jpg" alt="Parent control panel with approvals" width="603" height="1311" loading="lazy">
+                        </div>
+                    </div>
+                    <span class="float-star float-star-magenta float-star-slow" style="bottom: 15%; right: -14px; width: 9px; height: 9px;"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="how-it-works">
+        <div class="container-wide">
+            <div class="fade-in">
+                <p class="section-label" style="color: var(--sparkle-cyan); text-align: center;">How it works</p>
+                <h2>Simple for the whole family</h2>
+            </div>
+            <div class="steps fade-in">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Set Up Tasks</h3>
+                    <p>Parents define tasks that build real skills &mdash; reading goals, study sessions, new challenges. Each task earns stars that motivate.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Kids Do &amp; Earn</h3>
+                    <p>Kids complete tasks, build streaks, and watch their stars grow. Parents approve from the dashboard with a tap.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Level Up &amp; Redeem</h3>
+                    <p>Stars unlock badges, titles, and rewards. From "Treat Yourself" to "Cosmic Champion" &mdash; every milestone feels earned.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights">
+        <div class="container highlights-content">
+            <div class="fade-in">
+                <p class="section-label">Why Sparkle</p>
+                <h2>Built for privacy, designed for joy</h2>
+            </div>
+            <div class="highlight-grid fade-in">
+                <div class="highlight-item">
+                    <h3>No Account Needed</h3>
+                    <p>Open the app, add a kid, start earning. No sign-up, no email, no passwords.</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>Zero Tracking</h3>
+                    <p>No analytics, no third-party services, no data leaving your device. Your family's business stays yours.</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>Sound &amp; Haptics</h3>
+                    <p>Satisfying audio chimes and tactile feedback for every approval, every level-up, every badge unlocked.</p>
+                </div>
+                <div class="highlight-item">
+                    <h3>5 Languages</h3>
+                    <p>Fully localized in English, German, Spanish, French, and Turkish. Switch anytime in Settings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header fade-in">
+                <p class="section-label" style="color: var(--sparkle-cyan);">Questions</p>
+                <h2>Frequently asked</h2>
+            </div>
+            <div class="faq-list fade-in">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Is Sparkle free?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>Sparkle's core features are completely free. A one-time premium unlock is available for families who want the full experience &mdash; no subscriptions, no recurring charges.</p>
+                    </div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Do I need to create an account?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>No. Open Sparkle, add your first kid, and start right away. No sign-up, no email, no passwords.</p>
+                    </div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Does it work offline?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>Yes. Everything lives on your device. No internet needed. If you opt in to iCloud sync, your family's data stays in sync across devices automatically.</p>
+                    </div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>How many kids can I add?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>There's no limit. Add as many kids as your family has &mdash; each gets their own profile, tasks, stars, and progress.</p>
+                    </div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>What ages is Sparkle designed for?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>Sparkle is designed for kids ages 4&ndash;12, but the reward and level system works just as well for older kids and teenagers.</p>
+                    </div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        <span>Is my family's data private?</span>
+                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer"><div class="faq-answer-inner">
+                        <p>Absolutely. Sparkle has zero analytics, zero third-party services, and zero data leaving your device. If you enable iCloud sync, data stays in your personal Apple account &mdash; we never see it.</p>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="fade-in">
+                <h2>Ready to spark something great?</h2>
+                <p>Join the beta and give your kids a system that turns effort into habit, rewards into growth, and potential into something real.</p>
+                <div class="cta-actions">
+                    <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn btn-hero">Request TestFlight Beta</a>
+                    <a href="/sparkle/support" class="btn btn-ghost">Get Support</a>
+                </div>
+                <!-- App Store rating — uncomment after launch
+                <div class="cta-rating">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <span class="rating-number">5.0</span>
+                    <div class="rating-stars">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sparkle-gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sparkle-gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sparkle-gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sparkle-gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--sparkle-gold)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <span class="rating-label">on the App Store</span>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #09111D !important; border-top: 1px solid rgba(255,255,255,0.04);">
+        <div class="footer-inner" style="color: rgba(255,255,255,0.2);">
+            <p class="footer-copy" style="color: rgba(255,255,255,0.2);">&copy; 2026 Anka TMS</p>
+            <ul class="footer-links" style="">
+                <li><a href="/sparkle/privacy" style="color: rgba(255,255,255,0.3);">Privacy</a></li>
+                <li><a href="/sparkle/support" style="color: rgba(255,255,255,0.3);">Support</a></li>
+                <li><a href="mailto:support@ankatms.com" style="color: rgba(255,255,255,0.3);">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                btn.setAttribute('aria-expanded', !isOpen);
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
