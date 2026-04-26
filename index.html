@@ -7,29 +7,99 @@
     <meta name="description" content="Anka TMS is an independent app studio crafting thoughtful, beautifully designed iOS apps. The art of making apps.">
     <meta property="og:title" content="Anka TMS — The art of making apps">
     <meta property="og:description" content="An independent iOS studio. Crafting apps with purpose, precision, and soul.">
-    <meta property="og:image" content="https://ankatms.com/assets/images/sparkle-icon.jpeg">
+    <meta property="og:image" content="https://ankatms.com/assets/images/sparkle-icon-e1-classic.png">
     <meta property="og:url" content="https://ankatms.com">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Anka TMS — The art of making apps">
     <meta name="twitter:description" content="An independent iOS studio. Crafting apps with purpose, precision, and soul.">
-    <meta name="twitter:image" content="https://ankatms.com/assets/images/sparkle-icon.jpeg">
-    <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://ankatms.com/assets/images/sparkle-icon-e1-classic.png">
+    <link rel="icon" type="image/png" href="assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/shared.css">
+    <link rel="stylesheet" href="assets/css/shared.css">
     <style>
+        /* ============================================
+           E1 Classic Diagonal — selection palette
+           cyan → violet → magenta
+           ============================================ */
+        :root {
+            --e1-cyan: #00F5FF;
+            --e1-violet: #9D5BFF;
+            --e1-magenta: #FF1FB5;
+            --e1-gradient: linear-gradient(135deg, var(--e1-cyan) 0%, var(--e1-violet) 50%, var(--e1-magenta) 100%);
+            --e1-gradient-soft: linear-gradient(135deg, rgba(0, 245, 255, 0.18) 0%, rgba(157, 91, 255, 0.14) 50%, rgba(255, 31, 181, 0.18) 100%);
+        }
+
         body {
             background: #09111D;
             color: rgba(255, 255, 255, 0.8);
+            position: relative;
         }
+
+        /* ---- Global cosmic scene ---- */
+        /* Starfield */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.55), transparent 50%),
+                radial-gradient(1px 1px at 28% 67%, rgba(255,255,255,0.4), transparent 50%),
+                radial-gradient(1.5px 1.5px at 41% 14%, rgba(0,245,255,0.6), transparent 50%),
+                radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.5), transparent 50%),
+                radial-gradient(1px 1px at 67% 30%, rgba(255,255,255,0.45), transparent 50%),
+                radial-gradient(1.5px 1.5px at 78% 58%, rgba(255,31,181,0.5), transparent 50%),
+                radial-gradient(1px 1px at 88% 12%, rgba(255,255,255,0.5), transparent 50%),
+                radial-gradient(1px 1px at 92% 76%, rgba(157,91,255,0.55), transparent 50%),
+                radial-gradient(1px 1px at 8% 88%, rgba(255,255,255,0.4), transparent 50%),
+                radial-gradient(1px 1px at 35% 35%, rgba(255,255,255,0.3), transparent 50%),
+                radial-gradient(1px 1px at 62% 50%, rgba(255,255,255,0.35), transparent 50%),
+                radial-gradient(1px 1px at 18% 50%, rgba(255,255,255,0.3), transparent 50%);
+            background-size: 700px 700px;
+            background-repeat: repeat;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 0;
+            animation: starTwinkle 8s ease-in-out infinite;
+        }
+
+        /* Drifting aurora */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: -10%;
+            background:
+                radial-gradient(ellipse 50% 40% at 15% 25%, rgba(0, 245, 255, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 85% 70%, rgba(255, 31, 181, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 35% at 50% 90%, rgba(157, 91, 255, 0.05) 0%, transparent 65%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
+            animation: auroraDrift 22s ease-in-out infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 0.85; }
+        }
+
+        @keyframes auroraDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, -2%) scale(1.05); }
+            66% { transform: translate(-2%, 1%) scale(0.97); }
+        }
+
+        nav, section, footer { position: relative; z-index: 2; }
 
         /* ---- Dark nav override ---- */
         nav {
-            background: rgba(9, 17, 29, 0.8);
-            border-bottom-color: rgba(255, 255, 255, 0.06);
+            background: rgba(9, 17, 29, 0.72);
+            border-bottom-color: rgba(157, 91, 255, 0.08);
+            backdrop-filter: saturate(160%) blur(24px);
+            -webkit-backdrop-filter: saturate(160%) blur(24px);
         }
 
         .logo {
@@ -56,7 +126,7 @@
 
         .nav-links a { color: rgba(255, 255, 255, 0.45); }
         .nav-links a:hover { color: #fff; }
-        .nav-links a::after { background: linear-gradient(90deg, var(--sparkle-gold), var(--sparkle-teal)); }
+        .nav-links a::after { background: var(--e1-gradient); }
 
         .nav-links .nav-cta {
             background: rgba(255, 255, 255, 0.08);
@@ -73,7 +143,7 @@
             position: relative;
             padding: 200px 24px 160px;
             text-align: center;
-            background: #09111D;
+            background: transparent;
             overflow: hidden;
         }
 
@@ -83,10 +153,98 @@
             top: -30%;
             left: 50%;
             transform: translateX(-50%);
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(245, 166, 35, 0.06) 0%, rgba(43, 191, 164, 0.04) 30%, transparent 60%);
+            width: 1100px;
+            height: 1100px;
+            background:
+                radial-gradient(circle at 28% 35%, rgba(0, 245, 255, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 72% 35%, rgba(255, 31, 181, 0.13) 0%, transparent 45%),
+                radial-gradient(circle at 50% 65%, rgba(157, 91, 255, 0.10) 0%, transparent 55%);
             border-radius: 50%;
+            filter: blur(6px);
+            animation: heroDrift 16s ease-in-out infinite;
+        }
+
+        /* Subtle grid weave behind the hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes heroDrift {
+            0%, 100% { transform: translateX(-50%) rotate(0deg) scale(1); }
+            50% { transform: translateX(-50%) rotate(8deg) scale(1.06); }
+        }
+
+        .hero h1 .accent {
+            background: var(--e1-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* ---- Hero icon (cosmic E1) ---- */
+        .hero-icon {
+            position: relative;
+            width: 132px;
+            height: 132px;
+            border-radius: 30px;
+            margin: 0 auto 36px;
+            overflow: hidden;
+            box-shadow:
+                0 12px 50px rgba(0, 245, 255, 0.26),
+                0 0 90px rgba(255, 31, 181, 0.22),
+                0 0 140px rgba(157, 91, 255, 0.14),
+                0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+            animation: iconFloat 5.5s ease-in-out infinite;
+            z-index: 3;
+        }
+        .hero-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, transparent 35%, transparent 65%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Eyebrow with pulsing gradient dot */
+        .hero-studio {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-studio::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--e1-gradient);
+            box-shadow: 0 0 12px rgba(157, 91, 255, 0.8);
+            animation: dotPulse 2.4s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         .hero-content {
@@ -123,18 +281,47 @@
             line-height: 1.6;
         }
 
-        /* Divider line */
+        /* Divider line — gradient-aware */
         .divider {
-            width: 48px;
+            width: 80px;
             height: 1px;
-            background: rgba(255, 255, 255, 0.12);
+            background: linear-gradient(90deg, transparent, var(--e1-violet), transparent);
             margin: 0 auto;
+            opacity: 0.5;
         }
 
         /* ---- Product ---- */
         .product {
             padding: 120px 24px;
-            background: #09111D;
+            background: linear-gradient(180deg, #09111D 0%, #0A1320 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Soft side glows on product section */
+        .product::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -200px;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.06) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .product::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -200px;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 31, 181, 0.05) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .product-inner {
@@ -154,7 +341,11 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--sparkle-gold);
+            background: var(--e1-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             margin-bottom: 16px;
         }
 
@@ -198,17 +389,20 @@
             font-family: var(--font);
             border-radius: 980px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
             cursor: pointer;
             border: none;
-            background: #fff;
-            color: #09111D;
+            background: var(--e1-gradient);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(157, 91, 255, 0.32),
+                        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
         }
 
         .btn-light:hover {
-            background: rgba(255, 255, 255, 0.9);
             transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+            filter: brightness(1.08) saturate(1.05);
+            box-shadow: 0 8px 28px rgba(255, 31, 181, 0.38),
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
         }
 
         .btn-dark-outline {
@@ -238,8 +432,27 @@
             width: 260px;
         }
 
+        .product-phone {
+            position: relative;
+            flex-shrink: 0;
+            width: 260px;
+        }
+
+        .product-phone::before {
+            content: '';
+            position: absolute;
+            inset: -40px;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(0, 245, 255, 0.18) 0%, transparent 55%),
+                radial-gradient(circle at 70% 70%, rgba(255, 31, 181, 0.18) 0%, transparent 55%);
+            filter: blur(30px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
         .product-phone .phone-frame {
             position: relative;
+            z-index: 1;
             width: 100%;
             aspect-ratio: 393 / 852;
             border-radius: clamp(32px, 15%, 44px);
@@ -248,7 +461,8 @@
             border: 3px solid rgba(255, 255, 255, 0.08);
             box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 80px rgba(245, 166, 35, 0.04);
+                0 0 80px rgba(157, 91, 255, 0.18),
+                0 0 0 1px rgba(0, 245, 255, 0.08) inset;
         }
 
         .product-phone .phone-frame img {
@@ -262,8 +476,22 @@
         /* ---- Values ---- */
         .values {
             padding: 120px 24px;
-            background: #0C1520;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: linear-gradient(180deg, #0A1320 0%, #0C1520 50%, #09111D 100%);
+            border-top: 1px solid rgba(157, 91, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .values::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, var(--e1-violet), transparent);
+            opacity: 0.4;
         }
 
         .values-header {
@@ -281,20 +509,64 @@
         }
 
         .values-grid {
+            position: relative;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
             max-width: 960px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.04);
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* Gradient halo border */
+        .values-grid::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 19px;
+            padding: 1px;
+            background: var(--e1-gradient);
+            opacity: 0.25;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .value-item {
-            padding: 36px 28px;
+            position: relative;
+            padding: 40px 28px 36px;
             background: #0C1520;
+            transition: background 0.4s ease;
         }
+
+        .value-item:hover {
+            background: #0F1A29;
+        }
+
+        /* Top accent line per value, tinted by index */
+        .value-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 28px;
+            right: 28px;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.35;
+        }
+        .value-item:nth-child(1) { color: #00F5FF; }
+        .value-item:nth-child(2) { color: #5BB8FF; }
+        .value-item:nth-child(3) { color: #9D5BFF; }
+        .value-item:nth-child(4) { color: #FF1FB5; }
+        .value-item h3, .value-item p { color: initial; }
+        .value-item h3 { color: #ffffff; }
+        .value-item p { color: rgba(255, 255, 255, 0.4); }
 
         .value-item h3 {
             font-size: 0.95rem;
@@ -318,8 +590,8 @@
 
         /* ---- Footer ---- */
         footer {
-            background: #09111D !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: linear-gradient(180deg, #09111D 0%, #07101A 100%) !important;
+            border-top: 1px solid rgba(157, 91, 255, 0.08);
         }
 
         .footer-copy { color: rgba(255, 255, 255, 0.2); }
@@ -363,7 +635,7 @@
             <ul class="nav-links">
                 <li><a href="#product">Product</a></li>
                 <li><a href="#values">About</a></li>
-                <li><a href="mailto:support@ankatms.com">Contact</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#8ffcfaffffe0fdfbcfeee1e4eefbe2fca1ece0e2">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -371,8 +643,11 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content fade-in">
+            <div class="hero-icon">
+                <img src="assets/images/sparkle-icon-e1-classic.png" alt="Sparkle app icon" width="132" height="132">
+            </div>
             <p class="hero-studio">THE MAKERS STUDIO</p>
-            <h1>The art<br>of making apps.</h1>
+            <h1>The <span class="accent">art</span><br>of making apps.</h1>
             <p>Independent apps crafted with purpose, precision, and soul.</p>
         </div>
     </section>
@@ -388,13 +663,13 @@
                 <p>A motivation system that helps kids build real habits &mdash; reading, studying, learning new things. They start for the stars. They stay because it becomes who they are. Built to relieve parents and help kids reach their potential.</p>
                 <p class="product-meta">by Anka &middot; iOS &middot; iPhone &amp; iPad &middot; Beta</p>
                 <div class="product-actions">
-                    <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn-light">Join Beta</a>
+                    <a href="/cdn-cgi/l/email-protection#10636560607f626450717e7b71647d633e737f7d2f6365727a7573642d436071627b7c7535222044756364567c797778643522205275647135222042756165756364" class="btn-light">Join Beta</a>
                     <a href="/sparkle" class="btn-dark-outline">Learn more</a>
                 </div>
             </div>
             <div class="product-phone fade-in fade-in-delay-2">
                 <div class="phone-frame">
-                    <img src="/assets/images/sparkle/screen-home.jpg" alt="Sparkle app home screen" width="603" height="1311" loading="lazy">
+                    <img src="assets/images/sparkle/screen-home.jpg" alt="Sparkle app home screen" width="603" height="1311" loading="lazy">
                 </div>
             </div>
         </div>
@@ -408,22 +683,22 @@
         </div>
         <div class="values-grid fade-in">
             <div class="value-item">
-                <div class="value-dot" style="background: var(--sparkle-gold);"></div>
+                <div class="value-dot" style="background: #00F5FF; box-shadow: 0 0 12px rgba(0, 245, 255, 0.6);"></div>
                 <h3>People First</h3>
                 <p>Technology adapts to people, not the other way around. We build for real lives, not engagement metrics.</p>
             </div>
             <div class="value-item">
-                <div class="value-dot" style="background: var(--sparkle-teal);"></div>
+                <div class="value-dot" style="background: #5BB8FF; box-shadow: 0 0 12px rgba(91, 184, 255, 0.55);"></div>
                 <h3>Fresh Perspective</h3>
                 <p>We question defaults. If something can be simpler, more private, or more respectful &mdash; it should be.</p>
             </div>
             <div class="value-item">
-                <div class="value-dot" style="background: var(--sparkle-star-yellow);"></div>
+                <div class="value-dot" style="background: #9D5BFF; box-shadow: 0 0 12px rgba(157, 91, 255, 0.6);"></div>
                 <h3>Thoughtful Craft</h3>
                 <p>Innovation is not adding more. It's making complexity disappear without losing depth.</p>
             </div>
             <div class="value-item">
-                <div class="value-dot" style="background: var(--sparkle-purple);"></div>
+                <div class="value-dot" style="background: #FF1FB5; box-shadow: 0 0 12px rgba(255, 31, 181, 0.6);"></div>
                 <h3>Integrity by Design</h3>
                 <p>No tracking, no dark patterns, no data harvesting. Privacy is a foundation, not a feature.</p>
             </div>
@@ -438,12 +713,12 @@
                 <li><a href="/sparkle">Sparkle</a></li>
                 <li><a href="/privacy">Privacy</a></li>
                 <li><a href="/terms">Terms</a></li>
-                <li><a href="mailto:support@ankatms.com">Contact</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#3d4e484d4d524f497d5c53565c49504e135e5250">Contact</a></li>
             </ul>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

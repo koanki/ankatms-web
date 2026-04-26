@@ -11,17 +11,73 @@
     <meta property="og:url" content="https://ankatms.com/sparkle">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="assets/images/favicon-32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/shared.css">
+    <link rel="stylesheet" href="assets/css/shared.css">
     <style>
-        body { background: #09111D; color: rgba(255,255,255,0.8); }
+        /* ============================================
+           E1 Classic Diagonal — selection palette
+           ============================================ */
+        :root {
+            --e1-cyan: #00F5FF;
+            --e1-violet: #9D5BFF;
+            --e1-magenta: #FF1FB5;
+            --e1-gradient: linear-gradient(135deg, var(--e1-cyan) 0%, var(--e1-violet) 50%, var(--e1-magenta) 100%);
+        }
+        /* Override existing sparkle tokens to E1 family so all downstream rules retune */
+        :root {
+            --sparkle-cyan: #00F5FF;
+            --sparkle-magenta: #FF1FB5;
+            --sparkle-purple: #9D5BFF;
+        }
+
+        body { background: #09111D; color: rgba(255,255,255,0.8); position: relative; }
+
+        /* ---- Global cosmic scene ---- */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.55), transparent 50%),
+                radial-gradient(1px 1px at 28% 67%, rgba(255,255,255,0.4), transparent 50%),
+                radial-gradient(1.5px 1.5px at 41% 14%, rgba(0,245,255,0.6), transparent 50%),
+                radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.5), transparent 50%),
+                radial-gradient(1px 1px at 67% 30%, rgba(255,255,255,0.45), transparent 50%),
+                radial-gradient(1.5px 1.5px at 78% 58%, rgba(255,31,181,0.5), transparent 50%),
+                radial-gradient(1px 1px at 88% 12%, rgba(255,255,255,0.5), transparent 50%),
+                radial-gradient(1px 1px at 92% 76%, rgba(157,91,255,0.55), transparent 50%),
+                radial-gradient(1px 1px at 8% 88%, rgba(255,255,255,0.4), transparent 50%),
+                radial-gradient(1px 1px at 35% 35%, rgba(255,255,255,0.3), transparent 50%),
+                radial-gradient(1px 1px at 62% 50%, rgba(255,255,255,0.35), transparent 50%),
+                radial-gradient(1px 1px at 18% 50%, rgba(255,255,255,0.3), transparent 50%);
+            background-size: 700px 700px; background-repeat: repeat;
+            opacity: 0.7; pointer-events: none; z-index: 0;
+            animation: starTwinkle 8s ease-in-out infinite;
+        }
+        body::after {
+            content: ''; position: fixed; inset: -10%;
+            background:
+                radial-gradient(ellipse 50% 40% at 15% 25%, rgba(0, 245, 255, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 85% 70%, rgba(255, 31, 181, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 35% at 50% 90%, rgba(157, 91, 255, 0.05) 0%, transparent 65%);
+            filter: blur(40px); pointer-events: none; z-index: 0;
+            animation: auroraDrift 22s ease-in-out infinite;
+        }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 0.85; }
+        }
+        @keyframes auroraDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, -2%) scale(1.05); }
+            66% { transform: translate(-2%, 1%) scale(0.97); }
+        }
+        nav, section, footer { position: relative; z-index: 2; }
 
         /* ---- Dark nav ---- */
-        nav { background: rgba(9,17,29,0.8); border-bottom-color: rgba(255,255,255,0.06); }
+        nav { background: rgba(9,17,29,0.72); border-bottom-color: rgba(157,91,255,0.08); backdrop-filter: saturate(160%) blur(24px); -webkit-backdrop-filter: saturate(160%) blur(24px); }
         .logo { display: flex; align-items: baseline; gap: 5px; }
         .logo-word {
             font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
@@ -31,31 +87,50 @@
         .logo-tms { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
         .nav-links a { color: rgba(255,255,255,0.45); }
         .nav-links a:hover { color: #fff; }
-        .nav-links a::after { background: linear-gradient(90deg, var(--sparkle-cyan), var(--sparkle-magenta)); }
+        .nav-links a::after { background: var(--e1-gradient); }
         .nav-links .nav-cta { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: #fff; }
         .nav-links .nav-cta:hover { background: rgba(255,255,255,0.14); box-shadow: none; }
 
         /* ---- Hero ---- */
         .hero {
             position: relative; padding: 160px 24px 0; text-align: center;
-            background: #09111D; overflow: hidden;
+            background: transparent; overflow: hidden;
         }
         .hero::before {
             content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
-            width: 700px; height: 700px;
-            background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, rgba(224,64,251,0.06) 40%, transparent 70%);
-            border-radius: 50%; animation: pulse 6s ease-in-out infinite;
+            width: 900px; height: 900px;
+            background:
+                radial-gradient(circle at 28% 35%, rgba(0,245,255,0.13) 0%, transparent 45%),
+                radial-gradient(circle at 72% 35%, rgba(255,31,181,0.12) 0%, transparent 45%),
+                radial-gradient(circle at 50% 65%, rgba(157,91,255,0.10) 0%, transparent 55%);
+            border-radius: 50%; animation: pulse 8s ease-in-out infinite;
         }
         .hero::after {
             content: ''; position: absolute; bottom: -10%; right: -5%;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(224,64,251,0.1) 0%, transparent 60%);
-            border-radius: 50%; animation: pulse 8s ease-in-out infinite reverse;
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(255,31,181,0.10) 0%, rgba(157,91,255,0.06) 40%, transparent 70%);
+            border-radius: 50%; animation: pulse 10s ease-in-out infinite reverse;
         }
         .hero-content { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
         .hero-icon {
-            width: 120px; height: 120px; border-radius: 28px; margin: 0 auto 32px; overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0,212,255,0.2), 0 0 80px rgba(224,64,251,0.1);
+            position: relative;
+            width: 132px; height: 132px; border-radius: 30px;
+            margin: 0 auto 32px; overflow: hidden;
+            box-shadow:
+                0 12px 50px rgba(0,245,255,0.28),
+                0 0 90px rgba(255,31,181,0.22),
+                0 0 140px rgba(157,91,255,0.14),
+                0 0 0 1px rgba(255,255,255,0.06) inset;
+            animation: iconFloat 5.5s ease-in-out infinite;
+        }
+        .hero-icon::after {
+            content: ''; position: absolute; inset: 0; border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 35%, transparent 65%, rgba(255,255,255,0.06) 100%);
+            pointer-events: none;
+        }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
         .hero-icon img { width: 100%; height: 100%; object-fit: cover; }
         .hero h1 {
@@ -68,8 +143,8 @@
         .hero .attribution a:hover { color: rgba(255,255,255,0.6); }
         .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-        .btn-hero { background: #fff; color: #09111D; box-shadow: 0 4px 24px rgba(255,255,255,0.1); }
-        .btn-hero:hover { transform: scale(1.04) translateY(-1px); box-shadow: 0 8px 32px rgba(255,255,255,0.15); }
+        .btn-hero { background: var(--e1-gradient); color: #fff; box-shadow: 0 4px 24px rgba(157,91,255,0.32), 0 0 0 1px rgba(255,255,255,0.06) inset; }
+        .btn-hero:hover { transform: scale(1.04) translateY(-1px); filter: brightness(1.08) saturate(1.05); box-shadow: 0 8px 32px rgba(255,31,181,0.4), 0 0 0 1px rgba(255,255,255,0.1) inset; }
         .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.1); }
         .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
 
@@ -80,20 +155,22 @@
             position: relative; width: 100%; aspect-ratio: 393 / 852;
             border-radius: clamp(32px, 15%, 44px); overflow: hidden; background: #000;
             border: 3px solid rgba(255,255,255,0.08);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 60px rgba(0,212,255,0.06), 0 0 60px rgba(224,64,251,0.04);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 70px rgba(0,245,255,0.10), 0 0 70px rgba(255,31,181,0.10), 0 0 0 1px rgba(157,91,255,0.08) inset;
         }
         .phone-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 
         .hero-dots span { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); pointer-events: none; }
 
         /* ---- Intro ---- */
-        .intro { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
-        .intro-inner { border-left: 3px solid transparent; border-image: linear-gradient(180deg, var(--sparkle-cyan), var(--sparkle-magenta)) 1; padding-left: 32px; }
+        .intro { background: linear-gradient(180deg, #0A1320 0%, #0C1520 100%); border-top: 1px solid rgba(157,91,255,0.08); position: relative; overflow: hidden; }
+        .intro::before { content: ''; position: absolute; top: 50%; right: -180px; transform: translateY(-50%); width: 420px; height: 420px; background: radial-gradient(circle, rgba(0,245,255,0.06), transparent 60%); border-radius: 50%; pointer-events: none; }
+        .intro-inner { border-left: 3px solid transparent; border-image: linear-gradient(180deg, var(--e1-cyan), var(--e1-violet), var(--e1-magenta)) 1; padding-left: 32px; }
         .intro h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 20px; color: #fff; }
         .intro p { font-size: 1.05rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 560px; }
 
         /* ---- Features ---- */
-        .features { background: #09111D; padding-top: 80px; padding-bottom: 40px; }
+        .features { background: linear-gradient(180deg, #0C1520 0%, #09111D 100%); padding-top: 80px; padding-bottom: 40px; position: relative; overflow: hidden; }
+        .features::before { content: ''; position: absolute; top: 30%; left: -200px; width: 480px; height: 480px; background: radial-gradient(circle, rgba(255,31,181,0.05), transparent 60%); border-radius: 50%; pointer-events: none; }
         .features-header { text-align: center; margin-bottom: 24px; }
         .features-header h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: #fff; }
 
@@ -106,42 +183,44 @@
         .feature-block-phone { flex-shrink: 0; width: 280px; position: relative; }
         .feature-block-phone .phone-frame {
             border-color: rgba(255,255,255,0.08);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 40px rgba(0,212,255,0.04);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 50px rgba(0,245,255,0.06), 0 0 50px rgba(255,31,181,0.06);
         }
 
         .float-star { position: absolute; border-radius: 50%; opacity: 0.5; pointer-events: none; animation: float 3s ease-in-out infinite; }
-        .float-star-cyan { background: var(--sparkle-cyan); box-shadow: 0 0 12px var(--sparkle-cyan); }
-        .float-star-magenta { background: var(--sparkle-magenta); box-shadow: 0 0 12px var(--sparkle-magenta); }
+        .float-star-cyan { background: var(--e1-cyan); box-shadow: 0 0 14px var(--e1-cyan); }
+        .float-star-magenta { background: var(--e1-magenta); box-shadow: 0 0 14px var(--e1-magenta); }
+        .float-star-violet { background: var(--e1-violet); box-shadow: 0 0 14px var(--e1-violet); }
         .float-star-gold { background: var(--sparkle-star-yellow); box-shadow: 0 0 10px var(--sparkle-star-yellow); }
         .float-star-slow { animation: float-slow 5s ease-in-out infinite; }
 
         /* ---- How it Works ---- */
-        .how-it-works { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
+        .how-it-works { background: linear-gradient(180deg, #09111D 0%, #0C1520 100%); border-top: 1px solid rgba(157,91,255,0.08); position: relative; }
+        .how-it-works::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 220px; height: 1px; background: linear-gradient(90deg, transparent, var(--e1-violet), transparent); opacity: 0.5; }
         .how-it-works h2 { text-align: center; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 56px; color: #fff; }
         .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 800px; margin: 0 auto; }
         .step { text-align: center; }
-        .step-number { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--sparkle-cyan), var(--sparkle-magenta)); color: #fff; font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+        .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--e1-gradient); color: #fff; font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 6px 20px rgba(157,91,255,0.35); }
         .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
         .step p { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
 
         /* ---- Highlights ---- */
-        .highlights { background: #09111D; text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); }
-        .highlights::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, rgba(224,64,251,0.04) 30%, transparent 60%); border-radius: 50%; }
+        .highlights { background: linear-gradient(180deg, #0C1520 0%, #09111D 100%); text-align: center; position: relative; overflow: hidden; border-top: 1px solid rgba(157,91,255,0.08); }
+        .highlights::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; background: radial-gradient(circle at 30% 40%, rgba(0,245,255,0.07) 0%, transparent 45%), radial-gradient(circle at 70% 60%, rgba(255,31,181,0.07) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(157,91,255,0.05) 0%, transparent 60%); border-radius: 50%; }
         .highlights-content { position: relative; z-index: 2; }
-        .highlights .section-label { color: var(--sparkle-cyan); }
+        .highlights .section-label { background: var(--e1-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
         .highlights h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 48px; color: #fff; }
         .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 800px; margin: 0 auto; }
         .highlight-item h3 { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
         .highlight-item p { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
 
         /* ---- FAQ ---- */
-        .faq { background: #0C1520; border-top: 1px solid rgba(255,255,255,0.04); }
+        .faq { background: linear-gradient(180deg, #09111D 0%, #0C1520 100%); border-top: 1px solid rgba(157,91,255,0.08); }
         .faq-header { text-align: center; margin-bottom: 48px; }
         .faq-header h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: #fff; }
         .faq-list { max-width: 680px; margin: 0 auto; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
         .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-size: 1.05rem; font-weight: 600; color: rgba(255,255,255,0.8); font-family: var(--font); padding: 20px 0; }
-        .faq-question:hover { color: var(--sparkle-cyan); }
+        .faq-question:hover { color: var(--e1-cyan); }
         .faq-chevron { flex-shrink: 0; width: 20px; height: 20px; transition: transform 0.25s ease; color: rgba(255,255,255,0.3); }
         .faq-item.open .faq-chevron { transform: rotate(180deg); }
         .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease, opacity 0.3s ease; opacity: 0; }
@@ -150,7 +229,8 @@
         .faq-answer-inner p { padding: 0 0 20px; font-size: 0.95rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
 
         /* ---- CTA ---- */
-        .cta { background: #09111D; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+        .cta { background: linear-gradient(180deg, #0C1520 0%, #09111D 100%); text-align: center; border-top: 1px solid rgba(157,91,255,0.08); position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(157,91,255,0.06), transparent 70%); pointer-events: none; }
         .cta h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; color: #fff; }
         .cta p { font-size: 1.05rem; color: rgba(255,255,255,0.4); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
         .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -195,7 +275,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="/sparkle/privacy">Privacy</a></li>
-                <li><a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="nav-cta">Join Beta</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#a7d4d2d7d7c8d5d3e7c6c9ccc6d3cad489c4c8ca98d4d2c5cdc2c4d39af4d7c6d5cccbc2829597f3c2d4d3e1cbcec0cfd3829597e5c2d3c6829597f5c2d6d2c2d4d3" class="nav-cta">Join Beta</a></li>
             </ul>
         </div>
     </nav>
@@ -220,13 +300,13 @@
 
         <div class="hero-content fade-in">
             <div class="hero-icon">
-                <img src="/assets/images/sparkle-icon.jpeg" alt="Sparkle app icon" width="120" height="120">
+                <img src="assets/images/sparkle-icon-e1-classic.png" alt="Sparkle app icon" width="120" height="120">
             </div>
             <h1>Every kid deserves to shine</h1>
             <p class="tagline">A motivation system that helps kids build real habits &mdash; reading, learning, growing &mdash; one star at a time.</p>
             <p class="attribution"><a href="/">by Anka</a> &middot; a TMS studio &middot; iOS</p>
             <div class="hero-actions">
-                <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn btn-hero">
+                <a href="/cdn-cgi/l/email-protection#ec9f999c9c839e98ac8d82878d98819fc28f8381d39f998e86898f98d1bf9c8d9e878089c9dedcb8899f98aa80858b8498c9dedcae89988dc9dedcbe899d99899f98" class="btn btn-hero">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     Request TestFlight Beta
                 </a>
@@ -238,7 +318,7 @@
         <div class="hero-phone fade-in fade-in-delay-2">
             <div class="phone-mockup">
                 <div class="phone-frame">
-                    <img src="/assets/images/sparkle/screen-home.jpg" alt="Sparkle home screen showing family profiles and weekly stats" width="603" height="1311">
+                    <img src="assets/images/sparkle/screen-home.jpg" alt="Sparkle home screen showing family profiles and weekly stats" width="603" height="1311">
                 </div>
             </div>
         </div>
@@ -272,7 +352,7 @@
                 <div class="feature-block-phone">
                     <div class="phone-mockup" style="animation: none;">
                         <div class="phone-frame">
-                            <img src="/assets/images/sparkle/screen-tasks.jpg" alt="Kid's task list with star rewards" width="603" height="1311" loading="lazy">
+                            <img src="assets/images/sparkle/screen-tasks.jpg" alt="Kid's task list with star rewards" width="603" height="1311" loading="lazy">
                         </div>
                     </div>
                     <span class="float-star float-star-cyan" style="top: -8px; right: -12px; width: 10px; height: 10px;"></span>
@@ -289,7 +369,7 @@
                 <div class="feature-block-phone">
                     <div class="phone-mockup" style="animation: none;">
                         <div class="phone-frame">
-                            <img src="/assets/images/sparkle/screen-rewards.jpg" alt="Rewards list with star prices" width="603" height="1311" loading="lazy">
+                            <img src="assets/images/sparkle/screen-rewards.jpg" alt="Rewards list with star prices" width="603" height="1311" loading="lazy">
                         </div>
                     </div>
                     <span class="float-star float-star-cyan" style="top: 15%; right: -14px; width: 12px; height: 12px; animation-delay: 0.5s;"></span>
@@ -305,7 +385,7 @@
                 <div class="feature-block-phone">
                     <div class="phone-mockup" style="animation: none;">
                         <div class="phone-frame">
-                            <img src="/assets/images/sparkle/screen-badges.jpg" alt="Achievement badges and trophies" width="603" height="1311" loading="lazy">
+                            <img src="assets/images/sparkle/screen-badges.jpg" alt="Achievement badges and trophies" width="603" height="1311" loading="lazy">
                         </div>
                     </div>
                     <span class="float-star float-star-magenta float-star-slow" style="top: -10px; left: -10px; width: 10px; height: 10px;"></span>
@@ -322,7 +402,7 @@
                 <div class="feature-block-phone">
                     <div class="phone-mockup" style="animation: none;">
                         <div class="phone-frame">
-                            <img src="/assets/images/sparkle/screen-customize.jpg" alt="Avatar and background customization" width="603" height="1311" loading="lazy">
+                            <img src="assets/images/sparkle/screen-customize.jpg" alt="Avatar and background customization" width="603" height="1311" loading="lazy">
                         </div>
                     </div>
                     <span class="float-star float-star-cyan" style="top: 10%; left: -12px; width: 10px; height: 10px; animation-delay: 0.3s;"></span>
@@ -338,7 +418,7 @@
                 <div class="feature-block-phone">
                     <div class="phone-mockup" style="animation: none;">
                         <div class="phone-frame">
-                            <img src="/assets/images/sparkle/screen-control.jpg" alt="Parent control panel with approvals" width="603" height="1311" loading="lazy">
+                            <img src="assets/images/sparkle/screen-control.jpg" alt="Parent control panel with approvals" width="603" height="1311" loading="lazy">
                         </div>
                     </div>
                     <span class="float-star float-star-magenta float-star-slow" style="bottom: 15%; right: -14px; width: 9px; height: 9px;"></span>
@@ -475,7 +555,7 @@
                 <h2>Ready to spark something great?</h2>
                 <p>Join the beta and give your kids a system that turns effort into habit, rewards into growth, and potential into something real.</p>
                 <div class="cta-actions">
-                    <a href="mailto:support@ankatms.com?subject=Sparkle%20TestFlight%20Beta%20Request" class="btn btn-hero">Request TestFlight Beta</a>
+                    <a href="/cdn-cgi/l/email-protection#80f3f5f0f0eff2f4c0e1eeebe1f4edf3aee3efedbff3f5e2eae5e3f4bdd3f0e1f2ebece5a5b2b0d4e5f3f4c6ece9e7e8f4a5b2b0c2e5f4e1a5b2b0d2e5f1f5e5f3f4" class="btn btn-hero">Request TestFlight Beta</a>
                     <a href="/sparkle/support" class="btn btn-ghost">Get Support</a>
                 </div>
                 <!-- App Store rating — uncomment after launch
@@ -503,12 +583,12 @@
             <ul class="footer-links" style="">
                 <li><a href="/sparkle/privacy" style="color: rgba(255,255,255,0.3);">Privacy</a></li>
                 <li><a href="/sparkle/support" style="color: rgba(255,255,255,0.3);">Support</a></li>
-                <li><a href="mailto:support@ankatms.com" style="color: rgba(255,255,255,0.3);">Contact</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#bfcccacfcfd0cdcbffded1d4decbd2cc91dcd0d2" style="color: rgba(255,255,255,0.3);">Contact</a></li>
             </ul>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Scroll-triggered fade-in
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
